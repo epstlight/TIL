@@ -1,0 +1,15 @@
+    /* tag는 모든 tag에게 공통 */
+    h1, h2 {
+        color: darkgreen;
+    }
+    /* id는 unique하며 #으로 접근 */
+    #description {
+        background-color: aqua;
+    }
+    /* class는 다수존재하며 .으로 접근 */
+    li.listitem {
+        font-size: 20px;
+    }
+    ul li {
+        background-color: darkcyan;
+    }
