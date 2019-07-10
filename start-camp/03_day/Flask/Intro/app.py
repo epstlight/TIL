@@ -10,7 +10,6 @@ def hello():
     # return "Hello Python!"
     return render_template('index.html')     # render_template 모듈을 통해서 template 폴더의 있는 파일을 불러 올 수 있다.  폴더명은 꼭 template 여야만 한다. 
 
-
 @app.route('/ssafy')
 def ssafy():
     return 'Hello ssafy'
