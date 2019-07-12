@@ -51,5 +51,47 @@ def ascii_result():
     return render_template('ascii_result.html', result=response.text)
 
 
+@app.route('/lotto_input')
+def lotto_input():
+    return render_template('lotto_input.html')
+
+@app.route('/lotto_result')
+def lotto_result():
+    n_round = request.args.get('round')
+    numbers = list(map(int, request.args.get('numbers').split(" ")))
+    url = f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={n_round}'
+
+    lotto_info = requests.get(url).json()  #json 타입의 파일을 dic로 parsing 해줘
+    
+    cnt = 0
+    bnus = False
+    for i in range(1,7):
+       for number in numbers :
+           if number == lotto_info[f'drwtNo{i}']:
+               cnt += 1
+
+    for number in numbers :
+        if number == lotto_info['bnusNo']:
+            bnus = True
+    
+    if cnt == 3:
+        result_num = 5 
+    elif cnt == 4:
+        result_num = 4 
+    elif cnt == 5:
+        result_num = 3 
+    elif cnt == 5 and bns == True:
+        result_num = 2 
+    elif cnt ==6:
+        result_num = 1 
+    else : 
+        result_num = 0
+
+    if result_num == 0:
+        return '꽝!'
+    else :
+        return f'{result_num}등 입니다.!'
+
+
 if __name__ == "__main__":
     app.run(debug=True)
